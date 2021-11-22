@@ -1,5 +1,7 @@
 package com.qa.playlist.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.qa.playlist.domain.Playlist;
@@ -16,6 +18,10 @@ public class PlaylistService {
 	
 	public Playlist create(Playlist playlist) {
 		return this.repo.saveAndFlush(playlist);
+	}
+	
+	public List<Playlist> getAll(){
+		return this.repo.findAll();
 	}
 
 }

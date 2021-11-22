@@ -28,7 +28,7 @@ public class Playlist {
 	private String playlistName;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="song")
+	@OneToMany(mappedBy="playlist")
 	private List<Song> songs;
 
 }

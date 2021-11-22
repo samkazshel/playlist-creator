@@ -1,7 +1,10 @@
 package com.qa.playlist.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +28,9 @@ public class PlaylistController {
 		return new ResponseEntity<Playlist>(this.service.create(playlist), HttpStatus.CREATED);
 	}
 	
+	@GetMapping("/getAll")
+	public ResponseEntity<List<Playlist>> getAll(){
+		return new ResponseEntity<List<Playlist>>(this.service.getAll(), HttpStatus.ACCEPTED);
+	}
 
 }
