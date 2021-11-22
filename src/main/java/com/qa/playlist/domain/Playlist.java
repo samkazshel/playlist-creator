@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 public class Playlist {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long playlistID;
+	private Long id;
 	
 	@Column
 	private String playlistName;
