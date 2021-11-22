@@ -44,11 +44,11 @@ public class SongService {
 		return mapToDTO(found);
 	}
 	
-	public Song update (Long id, SongWithPlaylistNameDTO dto) {
+	public Song update (Long id, Song song) {
 		Song existing = this.repo.findById(id).get();
-		existing.setSongName(dto.getSongName());
-		existing.setSongArtist(dto.getSongArtist());
-		existing.setGenre(dto.getGenre());
+		existing.setSongName(song.getSongName());
+		existing.setSongArtist(song.getSongArtist());
+		existing.setGenre(song.getGenre());
 		return this.repo.saveAndFlush(existing);
 	}
 	
