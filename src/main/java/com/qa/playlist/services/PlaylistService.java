@@ -24,6 +24,12 @@ public class PlaylistService {
 		return this.repo.findAll();
 	}
 	
+	public Playlist update(Long id, Playlist playlist) {
+		Playlist existing = this.repo.findById(id).get();
+		existing.setPlaylistName(playlist.getPlaylistName());
+		existing.setSongs(playlist.getSongs());
+		return this.repo.saveAndFlush(existing);
+	}
 	
 	public boolean delete(Long id) {
 		this.repo.deleteById(id);
