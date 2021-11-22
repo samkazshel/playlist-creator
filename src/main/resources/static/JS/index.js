@@ -33,4 +33,4 @@ let postFetch = (object) => {
     })
 }
 
-create.addEventListender('click', postdata);
+create.addEventListener('click', postdata);
