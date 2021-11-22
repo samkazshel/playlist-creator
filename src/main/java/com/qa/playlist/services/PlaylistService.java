@@ -23,5 +23,12 @@ public class PlaylistService {
 	public List<Playlist> getAll(){
 		return this.repo.findAll();
 	}
+	
+	
+	public boolean delete(Long id) {
+		this.repo.deleteById(id);
+		
+		return !this.repo.existsById(id);
+	}
 
 }
