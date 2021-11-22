@@ -1,8 +1,14 @@
 package com.qa.playlist.services;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.stereotype.Service;
 
 import com.qa.playlist.domain.Song;
+import com.qa.playlist.dto.SongWithPlaylistNameDTO;
 import com.qa.playlist.repo.SongRepo;
 
 @Service
@@ -14,7 +20,27 @@ public class SongService {
 		this.repo = repo;
 	}
 	
+	private SongWithPlaylistNameDTO mapToDTO(Song song) {
+		SongWithPlaylistNameDTO dto = new SongWithPlaylistNameDTO();
+		
+		dto.setId(song.getId());
+		dto.setSongName(song.getSongName());
+		dto.setSongArtist(song.getSongArtist());
+		dto.setPlaylistName(song.getPlaylist().getPlaylistName());
+		return dto;
+	}
+
+	
 	public Song create(Song song) {
 		return this.repo.saveAndFlush(song);
+	}
+	
+	public List<SongWithPlaylistNameDTO> getAll(){
+		return this.repo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
+	}
+	
+	public SongWithPlaylistNameDTO getById(Long id) {
+		Song found = this.repo.findById(id).orElseThrow(EntityNotFoundException::new);
+		return mapToDTO(found);
 	}
 }
