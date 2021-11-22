@@ -43,4 +43,18 @@ public class SongService {
 		Song found = this.repo.findById(id).orElseThrow(EntityNotFoundException::new);
 		return mapToDTO(found);
 	}
+	
+	public Song update (Long id, SongWithPlaylistNameDTO dto) {
+		Song existing = this.repo.findById(id).get();
+		existing.setSongName(dto.getSongName());
+		existing.setSongArtist(dto.getSongArtist());
+		existing.setGenre(dto.getGenre());
+		return this.repo.saveAndFlush(existing);
+	}
+	
+	public boolean delete (Long id) {
+		this.repo.deleteById(id);
+		
+		return !this.repo.existsById(id);
+	}
 }
